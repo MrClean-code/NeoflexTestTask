@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <table width=70% border=0 cellpadding=4 cellspacing=0 align=center class="table1">
+        <form th:method="POST" th:action="@{/calculator}" th:object="${calculator}">
+            <h2 style="text-align: center"><p>New Calc</p></h2>
+
+            <tr>
+                <td><label for="firstNumber">First number: </label></td>
+                <td><input type="text" id="firstNumber"  th:field="*{firstNumber}" maxlength=25 class=textfield></td>
+                <td><div th:if="${#fields.hasErrors('firstNumber')}" th:errors="*{firstNumber}">error</div></td>
+            </tr>
+
+            <tr>
+                <td><label for="secondNumber">Second number: </label></td>
+                <td><input type="text" id="secondNumber"  th:field="*{secondNumber}" maxlength=25 class=textfield></td>
+                <td><div th:if="${#fields.hasErrors('secondNumber')}" th:errors="*{secondNumber}">error</div></td>
+            </tr>
+
+            <tr>
+                <td><label for="operation">Operation: </label></td>
+                <td><input type="text" id="operation"  th:field="*{operation}" maxlength=25 class=textfield></td>
+                <td><div th:if="${#fields.hasErrors('operation')}" th:errors="*{operation}">error</div></td>
+            </tr>
+
+            <tr>
+                <td align="bottom">
+                    <input align="bottom" type="submit" value="complete">
+                </td>
+            </tr>
+
+        </form>
+    </table>
+</body>
+</html>
