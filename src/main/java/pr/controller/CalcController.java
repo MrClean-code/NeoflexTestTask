@@ -44,7 +44,7 @@ public class CalcController {
         if (bindingResult.hasErrors()) {
             return "new";
         }
-        calcDAO.calcNumber(calc);
+        calcDAO.save(calc);
         return "redirect:/calculator";
     }
 

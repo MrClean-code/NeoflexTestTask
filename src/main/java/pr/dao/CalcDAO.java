@@ -2,6 +2,7 @@ package pr.dao;
 
 import org.springframework.stereotype.Component;
 import pr.exseption.CalcDAOExseption;
+import pr.math.MathCalc;
 import pr.model.Calc;
 
 import java.util.ArrayList;
@@ -9,41 +10,22 @@ import java.util.List;
 
 @Component
 public class CalcDAO {
-    private List<Calc> calcList;
     private List<Double> resultList;
 
     private double result;
+    private MathCalc mathCalc;
 
     public List<Double> index() {
         return resultList;
     }
 
-    public void calcNumber(Calc calc) throws CalcDAOExseption {
-        calcList = new ArrayList<>();
+    public void save(Calc calc) {
         resultList = new ArrayList<>();
-
-        calcList.add(calc);
-
-        switch (calc.getOperation()) {
-
-            case '+':
-                result = calc.getFirstNumber() + calc.getSecondNumber();
-                break;
-
-            case '-':
-                result = calc.getFirstNumber() - calc.getSecondNumber();
-                break;
-
-            case '*':
-                result = calc.getFirstNumber() * calc.getSecondNumber();
-                break;
-
-            case '/':
-                result = calc.getFirstNumber() / calc.getSecondNumber();
-                break;
-
-            default:
-                throw new CalcDAOExseption("no operation, please write +, -, *, /.");
+        mathCalc = new MathCalc();
+        try {
+            result = mathCalc.calcNumber(calc);
+        } catch (CalcDAOExseption e) {
+            e.printStackTrace();
         }
         resultList.add(result);
     }
